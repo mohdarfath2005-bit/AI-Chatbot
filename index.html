@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyAI Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="brand" aria-label="StudyAI">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path d="M12 2l8 4v6c0 5-3.2 9.3-8 10-4.8-.7-8-5-8-10V6l8-4z" fill="currentColor" opacity="0.9"/>
+              <path d="M9.2 12.2l1.8 1.8 3.8-4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-name">StudyAI</div>
+            <div class="brand-sub">Student workspace</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle light mode">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M21 12.8A8.5 8.5 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="profile" aria-label="Profile">
+          <div class="avatar" aria-hidden="true">S</div>
+          <div class="profile-meta">
+            <div class="profile-name">Student</div>
+            <div class="profile-plan">Premium</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" id="sidebar" aria-label="Recent chats">
+        <div class="sidebar-header">
+          <button class="primary-btn" id="new-chat-btn" type="button">
+            <span>New chat</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">Recent</div>
+          <div class="history" id="history-list" role="list"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-footnote">Private, local-only history</div>
+        </div>
+      </aside>
+
+      <main class="main" aria-label="Chat">
+        <section class="welcome" id="welcome">
+          <div class="welcome-card">
+            <div class="welcome-title">How can I help you today?</div>
+            <div class="welcome-sub">Explain concepts, summarize notes, debug code, and build study plans — in a calm, focused workspace.</div>
+          </div>
+
+          <div class="suggestions" id="suggestions" aria-label="Suggested prompts">
+            <button class="suggestion-card" type="button" data-prompt="Explain this topic in simple terms: ">
+              <div class="suggestion-title">Explain this topic</div>
+              <div class="suggestion-sub">Clear, step-by-step explanation</div>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Summarize my notes: ">
+              <div class="suggestion-title">Summarize my notes</div>
+              <div class="suggestion-sub">Key points + concise outline</div>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Help me with this coding task: ">
+              <div class="suggestion-title">Help with coding</div>
+              <div class="suggestion-sub">Debug, refactor, or explain code</div>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Solve this problem and show steps: ">
+              <div class="suggestion-title">Solve this problem</div>
+              <div class="suggestion-sub">Reasoning + final answer</div>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Create presentation points about: ">
+              <div class="suggestion-title">Create presentation points</div>
+              <div class="suggestion-sub">Structured bullets for slides</div>
+            </button>
+          </div>
+        </section>
+
+        <section class="chat" id="chat">
+          <div id="chat-box" class="chat-box" aria-live="polite" aria-label="Messages"></div>
+        </section>
+
+        <footer class="composer" aria-label="Message composer">
+          <div class="composer-inner">
+            <div class="composer-actions" aria-label="Composer actions">
+              <label class="icon-btn" for="file-input" aria-label="Attach file">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path d="M21 12.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l9.5-9.5a3.5 3.5 0 1 1 5 5l-9.6 9.6a2 2 0 0 1-2.9-2.9l8.9-8.9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </label>
+              <input id="file-input" type="file" hidden />
+
+              <button class="icon-btn" id="mic-btn" type="button" aria-label="Voice (coming soon)">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <path d="M19 11a7 7 0 0 1-14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="composer-field">
+              <input type="text" id="user-input" placeholder="Ask anything for your studies…" autocomplete="off" />
+            </div>
+
+            <button class="send-btn" id="send-btn" type="button" onclick="sendMessage()" aria-label="Send">
+              <span class="send-label">Send</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M5 12h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="composer-hint" id="composer-hint">Press Enter to send</div>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

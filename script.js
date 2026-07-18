@@ -1,4 +1,4 @@
-const API_KEY = "AQ.Ab8RN6J9z89r1LyiHbL6ZuvgG0EduQju_8oOb9IU74Sz1hNv6w";
+const API_KEY = "AQ.Ab8RN6KhkJ_MZKGmmuvaRI38Wgshgw_s_muNPmvqxu-nwdq6pw";
 
 const STORAGE_KEYS = {
   theme: "studyai_theme",
